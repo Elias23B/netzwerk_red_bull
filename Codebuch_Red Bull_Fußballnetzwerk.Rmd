@@ -1,0 +1,60 @@
+---
+title: "Codebuch für die Transferanalyse im Red Bull Fußballnetzwerk"
+author: "Elias_Bock"
+date: "2025-03-12"
+output: html_document
+ toc: true
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Einleitung
+
+Dieses Codebuch beschreibt die Struktur der Transferdaten für eine Netzwerkanalyse der Red Bull Fußballvereine. Die untersuchten Vereine sind:
+
+- RB Leipzig (rbl)
+- FC Red Bull Salzburg (rbs)
+- FC Liefering (fc_li)
+- New York Red Bulls (ny_rb)
+- Red Bull Bragantino (rbn)
+
+Die betrachteten Saisons sind: **21_22, 22_23, 23_24**.
+
+```{r}
+# Edgelist (Transfers)
+
+Transfers werden als gerichtete Kanten zwischen zwei Knoten (Verein oder Spieler) dargestellt.
+
+| **Spalte**       | **Beschreibung**                                                  | **Beispiel** |
+|------------------|------------------------------------------------------------------|--------------|
+| `from`          | Abgebender Verein oder Spieler (als ID)                          | rbs          |
+| `to`            | Aufnehmender Verein (als ID)                                    | rbl          |
+| `weight`        | Transferkosten in Millionen Euro (ablösefrei = 0)               | 15000000           |
+| `transferart`   | Art des Transfers: 1 = Kauf, 2 = Leihe, 3 = ablösefrei, 4 = Draft | 1            |
+| `saison`        | Saison des Transfers                                           | 21_22        |
+```
+
+```{r}
+# Node-Liste (Knoten: Vereine & Spieler)
+
+Jeder Knoten in der Netzwerkanalyse ist entweder ein Verein oder ein Spieler.
+
+| **Spalte**  | **Beschreibung**                                      | **Beispiel**              |
+|------------|------------------------------------------------------|--------------------------|
+| `id`       | Eindeutige ID für jeden Spieler oder Verein          | rbs, th_mue              |
+| `name`     | Vollständiger Name des Spielers oder Vereins        | FC Red Bull Salzburg     |
+| `typ`      | Typ des Knotens: 1 = Spieler, 2 = Verein             | 2                        |
+| `alter`    | Geburtsjahr des Spielers zum Zeitpunkt des Transfers (bei Vereinen: leer) | 2001 |
+| `position` | Position des Spielers (bei Vereinen: leer)          | Innenverteidiger         |
+| `land`     | Land des Vereins / Nationalität des Spielers        | Österreich               |
+
+```
+
+
+```{r}
+
+```
+
